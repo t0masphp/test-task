@@ -1,19 +1,22 @@
 <template>
     <div>
         <h3>Basket</h3>
-        <ul class="list-group" v-if="!isLoading">
-            <li class="list-group-item" v-for="item in basket" :key="index">
+        <ul class="list-group">
+            <li class="list-group-item" v-for="item in basket">
                 <span>{{item}}</span>
             </li>
         </ul>
-        <div v-if="isLoading">Loading...</div>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+
     export default {
         name: 'Basket',
-        props: ['basket', 'isLoading'],
+        computed: mapGetters({
+            basket: 'currentBasket'
+        }),
     }
 </script>
 

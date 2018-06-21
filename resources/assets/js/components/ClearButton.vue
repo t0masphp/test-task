@@ -3,15 +3,16 @@
 </template>
 
 <script>
-export default {
-  name: 'ClearButton',
-    methods: {
-        freeAllApples: function () {
-            axios.get('apples/free').then((response) => this.isLoading = false);
+    import {mapActions} from 'vuex'
 
-        }
+    export default {
+        name: 'ClearButton',
+        methods: mapActions({
+            freeAllApples: function (dispatch) {
+                dispatch('freeApples');
+            }
+        })
     }
-}
 </script>
 
 <style scoped>

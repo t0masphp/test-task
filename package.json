@@ -17,5 +17,8 @@
     "laravel-elixir-vueify": "1.0.6",
     "laravel-mix": "^1.0",
     "axios": "^0.16.2"
+  },
+  "dependencies": {
+    "vuex": "^3.0.1"
   }
 }

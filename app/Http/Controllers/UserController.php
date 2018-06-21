@@ -58,9 +58,7 @@ class UserController extends Controller
             $user->takeApple($appleModel);
 
             return ['success' => true, 'user' => $this->getById($id)];
-        }
-        catch (OddEvenException | NoAvailableAppleException | UserNotFoundException $ex)
-        {
+        } catch (OddEvenException | NoAvailableAppleException | UserNotFoundException $ex) {
             return ['success' => false, 'message' => $ex->getMessage()];
         }
     }

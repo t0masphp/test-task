@@ -19,8 +19,8 @@ class ApplesRepo
      */
     public function getFreeApples()
     {
-        return Apple::query()->whereDoesntHave('user')->get()->map(function () {
-            return 'Apple';
+        return Apple::query()->whereDoesntHave('user')->get()->map(function (Apple $apple) {
+            return 'Apple' . $apple->id;
         });
     }
 
@@ -43,7 +43,6 @@ class ApplesRepo
      */
     public function takeFreeApple(User $user)
     {
-        \DB::connection()->enableQueryLog();
         $freeApple = Apple::query()->whereDoesntHave('user')->first();
         if (!$freeApple) {
             throw new NoAvailableAppleException();
@@ -51,8 +50,8 @@ class ApplesRepo
 
         $userApples = $user->apples->first();
         if ($userApples) {
-            $oddEvenCondition = $userApples->id % 2 === 0;
-            $freeApple = Apple::query()->whereDoesntHave('user')->where(\DB::raw("id % 2"), $oddEvenCondition)->first();
+            $isEven = $userApples->id % 2 === 0;
+            $freeApple = Apple::query()->whereDoesntHave('user')->where(\DB::raw("id % 2"), $isEven ? 0 : 1)->first();
             if (!$freeApple) {
                 throw new OddEvenException();
             }
@@ -70,7 +69,6 @@ class ApplesRepo
     {
         $lastUpdatedApple = Apple::query()->orderBy('updated_at', 'desc')->first();
         $timePassed = time() - $lastUpdatedApple->updated_at->getTimestamp();
-        return true;
         return $timePassed > Config::get('app.basket.timeout', 60);
     }
 }

@@ -1,36 +1,18 @@
 require('./bootstrap');
 window.Vue = require('vue');
+import store from './store';
 
 Vue.component('users', require('./components/Users.vue'));
 Vue.component('clear-button', require('./components/ClearButton.vue'));
 Vue.component('basket', require('./components/Basket.vue'));
 Vue.component('alert-box', require('./components/AlertBox.vue'));
+import actions from './store/actions'
+window.events = new Vue();
 
 new Vue({
-    data: {
-        users: [],
-        basket: [],
-        isLoading: true,
-        error: null,
-        baseUrl: document.head.querySelector('meta[name="base-url"]')
-    },
     el: '#app',
-    created() {
-        this.getUsers();
-        this.getBuckets();
-    },
-    methods: {
-        getBuckets: function () {
-            axios.get('basket').then((response) => {
-                this.isLoading = false;
-                this.items = response.data;
-            });
-        },
-        getUsers: function () {
-            axios.get('users').then((response) => {
-                this.users = response.data;
-                this.isLoading = false;
-            });
-        },
-    }
+    store
 });
+
+actions.getUsers(store);
+actions.getBasket(store);
