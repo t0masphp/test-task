@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Exceptions\OddEvenException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -15,6 +16,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -24,17 +26,28 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * User apples relation
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function apples()
+    {
+        return $this->hasMany(Apple::class, 'user_id', 'id');
+    }
 
-    public function getApplesCount() {
+    public function getApplesCount()
+    {
         return 0;
     }
 
 
     /**
      * @param Apple $apple
+     * @throws \Throwable
      */
-    public function takeApple($apple ) {
-        // take apple
+    public function takeApple(Apple $apple)
+    {
+        $apple->fill(['user_id' => $this->id])->save();
     }
 
 }
