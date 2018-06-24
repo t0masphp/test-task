@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Basket</h3>
-        <ul class="list-group">
+        <ul class="list-group basket">
             <li class="list-group-item" v-for="item in basket">
                 <span>{{item}}</span>
             </li>
@@ -10,13 +10,9 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
-
     export default {
         name: 'Basket',
-        computed: mapGetters({
-            basket: 'currentBasket'
-        }),
+        props: ['basket']
     }
 </script>
 

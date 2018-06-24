@@ -1,18 +1,11 @@
-export const STORAGE_KEY = 'todos-vuejs'
-
-// for testing
-if (navigator.userAgent.indexOf('PhantomJS') > -1) {
-    window.localStorage.clear()
-}
-
 export const mutations = {
     setUsers(state, users) {
         state.users = users;
     },
+    updateUser(state, userData) {
+        state.users = state.users.map((user) => userData.id === user.id ? userData : user);
+    },
     setBasket(state, basket) {
         state.basket = basket;
-    },
-    flash(state, message) {
-        state.error = message;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Exceptions\OddEvenException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable

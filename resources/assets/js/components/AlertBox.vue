@@ -34,9 +34,7 @@
                 this.messageBody = messageBody;
                 this.type = type;
                 this.show = true;
-                setTimeout(() => {
-                    this.show = false;
-                }, 10000)
+                setTimeout(() => this.show = false, 1000);
             });
         },
     }

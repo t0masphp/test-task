@@ -20,9 +20,7 @@
 </head>
 
 <body>
-<div id="app">
     @yield('content')
-</div>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{{ url('/js/ie10-viewport-bug-workaround.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
