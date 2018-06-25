@@ -1,9 +1,10 @@
 <?php
 
+Route::get('/', 'HomeController@index' );
 
-
-
-Route::get('/', 'HomeController@getHome' );
-Route::get('/take-apple/{user_id}', 'HomeController@getTakeApple' );
-Route::get('/free-apples', 'HomeController@getFreeApples' );
+Route::get('/users', 'UserController@index' );
+Route::get('/users/{id}', 'UserController@getById' );
+Route::get('/users/{id}/grab', 'UserController@grabAnApple' );
+Route::get('/basket', 'ApplesController@getFree' );
+Route::get('/apples/free', 'ApplesController@makeFree' );
 

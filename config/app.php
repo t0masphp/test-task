@@ -212,4 +212,7 @@ return [
 
     ],
 
+    'basket' => [
+        'timeout' => 60
+    ]
 ];
